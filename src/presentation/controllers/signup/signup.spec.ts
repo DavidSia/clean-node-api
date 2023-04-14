@@ -15,10 +15,11 @@ const makeEmailValidator = (): EmailValidator => {
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     async add (account: AddAccountModel): Promise<AccountModel> {
-      const fakeAccount = {
+      const fakeAccount: AccountModel = {
         id: 'valid_id',
         name: 'valid_name',
-        email: 'valid_email@mail.com'
+        email: 'valid_email@mail.com',
+        password: 'hashed_password'
       }
 
       return await new Promise(resolve => { resolve(fakeAccount) })
@@ -207,7 +208,8 @@ describe('SignUpController', () => {
     expect(httpResponse.body).toEqual({
       id: 'valid_id',
       name: 'valid_name',
-      email: 'valid_email@mail.com'
+      email: 'valid_email@mail.com',
+      password: 'hashed_password'
     })
   })
 })
